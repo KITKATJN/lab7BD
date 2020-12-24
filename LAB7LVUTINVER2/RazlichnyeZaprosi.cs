@@ -42,5 +42,103 @@ namespace LAB7LVUTINVER2
         {
             Close();
         }
+
+        
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            string query = "SELECT  AVG([Количество студентов])  AS [Среднее количестов людей в группах] FROM Группа ";
+            OleDbDataAdapter command = new OleDbDataAdapter(query, myConnection);
+            DataTable dt = new DataTable();
+            command.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string query = "SELECT * FROM Занятие WHERE [Время проведения]<#12:00:00#";
+            OleDbDataAdapter command = new OleDbDataAdapter(query, myConnection);
+            DataTable dt = new DataTable();
+            command.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int number = Convert.ToInt32(textBox1.Text);
+            string query = "SELECT [Номер], [Корпус], [Этаж], [Тип аудитории], [Вместимость] FROM Аудитория WHERE [Вместимость] >" + number +" ORDER BY[Вместимость]";
+            OleDbDataAdapter command = new OleDbDataAdapter(query, myConnection);
+            DataTable dt = new DataTable();
+            command.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string query = "EXEC [5 Аудитория к корпусу]";
+            OleDbDataAdapter command = new OleDbDataAdapter(query, myConnection);
+            DataTable dt = new DataTable();
+            command.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+            int number = Convert.ToInt32(textBox2.Text);
+            string query = "EXEC [5 Предмет шаблон] " + number + "";
+            OleDbDataAdapter command = new OleDbDataAdapter(query, myConnection);
+            DataTable dt = new DataTable();
+            command.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string number = textBox3.Text;
+            string query = "EXEC [5 Занятие Отсорт] '" + number + "'";
+            OleDbDataAdapter command = new OleDbDataAdapter(query, myConnection);
+            DataTable dt = new DataTable();
+            command.Fill(dt);
+            dataGridView1.DataSource = dt;
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string query = "EXEC [6 запрос на обновление студентов]";
+            OleDbCommand command = new OleDbCommand(query, myConnection);
+            command.ExecuteNonQuery();
+            string query1 = "SELECT * FROM [Группа]";
+            OleDbDataAdapter command1 = new OleDbDataAdapter(query1, myConnection);
+            DataTable dt = new DataTable();
+            command1.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+            string query = "EXEC [6 добавление в группу]";
+            OleDbCommand command = new OleDbCommand(query, myConnection);
+            command.ExecuteNonQuery();
+            string query1 = "SELECT * FROM [Группа]";
+            OleDbDataAdapter command1 = new OleDbDataAdapter(query1, myConnection);
+            DataTable dt = new DataTable();
+            command1.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string query = "EXEC [6 удаление строки со вложенным запросом]";
+            OleDbCommand command = new OleDbCommand(query, myConnection);
+            command.ExecuteNonQuery();
+            string query1 = "SELECT * FROM [Кафедра]";
+            OleDbDataAdapter command1 = new OleDbDataAdapter(query1, myConnection);
+            DataTable dt = new DataTable();
+            command1.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
     }
 }
